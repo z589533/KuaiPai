@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity {
         editLoginActivityUsrName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                LogUtils.d("LoginActivity editLoginActivityUsrName  hasFocus = "+hasFocus);
+                LogUtils.d("LoginActivity editLoginActivityUsrName  hasFocus = " + hasFocus);
                 if (hasFocus) {
                     editLoginActivityUsrName.setCursorVisible(true);
                 }
@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity {
         editLoginActivityPassWord.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                LogUtils.d("LoginActivity editLoginActivityPassWord  hasFocus = "+hasFocus);
+                LogUtils.d("LoginActivity editLoginActivityPassWord  hasFocus = " + hasFocus);
                 if (hasFocus) {
                     editLoginActivityPassWord.setCursorVisible(true);
                 }

@@ -13,7 +13,8 @@ import cn.bmob.v3.BmobObject;
 
 @Entity // 标识实体类，greenDAO会映射成sqlite的一个表，表名为实体类名的大写形式
 public class HttpBeanMediaDetail extends BmobObject {
-    @Id(autoincrement = false) public long creatTimeAsId;  //把创建时间作为表的ID
+    @Id(autoincrement = false)
+    public long creatTimeAsId;  //把创建时间作为表的ID
     @Property(nameInDb = "HttpBeanMediaDetail")
     public String locationDesc;
     public String mediaUrl;

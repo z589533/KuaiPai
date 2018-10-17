@@ -29,7 +29,7 @@ public class RxBus {
                 }
             }
         }
-        return defaultInstance ;
+        return defaultInstance;
     }
 
     // 发送一个新的事件

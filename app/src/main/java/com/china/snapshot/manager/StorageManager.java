@@ -25,11 +25,11 @@ public class StorageManager {
 
     private static StorageManager instance;
 
-    public static StorageManager getInstance(){
+    public static StorageManager getInstance() {
         return instance;
     }
 
-    public static void initInstance(Context context){
+    public static void initInstance(Context context) {
         instance = new StorageManager(context);
     }
 
@@ -41,9 +41,9 @@ public class StorageManager {
     public String imageDir;
     public String tempDir;
 
-    private StorageManager(Context context){
+    private StorageManager(Context context) {
         String dir = StorageUtil.getSDCardPrivateCacheDir(context);
-        if(dir == null){
+        if (dir == null) {
             dir = StorageUtil.getInternalCacheDir(context);
         }
 
@@ -52,17 +52,17 @@ public class StorageManager {
         tempDir = dir + File.separator + TEMP_FOLDER;
 
         File videoFileDir = new File(videoDir);
-        if(!videoFileDir.exists()){
+        if (!videoFileDir.exists()) {
             videoFileDir.mkdir();
         }
 
         File imageFileDir = new File(imageDir);
-        if(!imageFileDir.exists()){
+        if (!imageFileDir.exists()) {
             imageFileDir.mkdir();
         }
 
         File tempFileDir = new File(tempDir);
-        if(tempFileDir.exists()){
+        if (tempFileDir.exists()) {
             tempFileDir.delete();
         }
         tempFileDir.mkdir();
@@ -72,9 +72,9 @@ public class StorageManager {
 
     private Map<String, List<IHttpFileCallback>> map = new ConcurrentHashMap<>();
 
-    public String getVideoFilepath(String url){
+    public String getVideoFilepath(String url) {
         String filename = getFilename(url);
-        if(filename != null){
+        if (filename != null) {
             return videoDir + File.separator + filename;
         }
         return null;
@@ -102,13 +102,13 @@ public class StorageManager {
             isDone = false;
         } finally {
             try {
-                if (is != null){
+                if (is != null) {
                     is.close();
                 }
             } catch (IOException e) {
             }
             try {
-                if (fs != null){
+                if (fs != null) {
                     fs.close();
                 }
             } catch (IOException e) {

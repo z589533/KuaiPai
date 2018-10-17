@@ -20,7 +20,7 @@ package com.china.snapshot.camera.capture;
  *  limitations under the License.
  *
  * All files in the folder are under this Apache License, Version 2.0.
-*/
+ */
 
 import android.app.AlertDialog;
 import android.app.Fragment;

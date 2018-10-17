@@ -23,7 +23,8 @@ import cn.bmob.v3.BmobUser;
 
 public class CurrentUserVideoActivity extends BaseActivity {
 
-    @BindView(R.id.rl_current_usr_activity) RecyclerView rlvMainActivity;
+    @BindView(R.id.rl_current_usr_activity)
+    RecyclerView rlvMainActivity;
     private CurrentUserVideoAdapter currentUserVideoAdapter;
     private List<HttpBeanMediaDetail> httpBeanMediaDetailList = new ArrayList<>();
     private BmobUser bmobUser;

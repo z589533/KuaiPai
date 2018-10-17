@@ -43,10 +43,10 @@ public class BaseActivity extends AppCompatActivity {
         isForegroundRunning = false;
     }
 
-    public Handler getHandler(){
-        if(mHandler == null){
-            synchronized (this){
-                if(mHandler == null){
+    public Handler getHandler() {
+        if (mHandler == null) {
+            synchronized (this) {
+                if (mHandler == null) {
                     mHandler = new Handler(Looper.getMainLooper());
                 }
             }
@@ -139,11 +139,11 @@ public class BaseActivity extends AppCompatActivity {
         return false;
     }
 
-    public void doInUI(Runnable runnable){
+    public void doInUI(Runnable runnable) {
         doInUI(runnable, 0);
     }
 
-    public void doInUI(Runnable runnable, long delayMillis){
+    public void doInUI(Runnable runnable, long delayMillis) {
         getHandler().postDelayed(runnable, delayMillis);
     }
 
@@ -245,7 +245,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-    public String getClassName(){
+    public String getClassName() {
         return getClass().getSimpleName();
     }
 
@@ -278,12 +278,12 @@ public class BaseActivity extends AppCompatActivity {
 
     //是否连接WIFI
     public boolean isWifiConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiNetworkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        if(wifiNetworkInfo.isConnected()) {
-            return true ;
+        if (wifiNetworkInfo.isConnected()) {
+            return true;
         }
-        return false ;
+        return false;
     }
 
     //设置屏幕背景透明度

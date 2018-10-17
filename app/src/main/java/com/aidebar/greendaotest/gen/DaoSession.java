@@ -24,7 +24,7 @@ import com.aidebar.greendaotest.gen.LocalMediaDetailBeanDao;
 
 /**
  * {@inheritDoc}
- * 
+ *
  * @see org.greenrobot.greendao.AbstractDaoSession
  */
 public class DaoSession extends AbstractDaoSession {
@@ -72,7 +72,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(HttpBeanMediaLikeDetail.class, httpBeanMediaLikeDetailDao);
         registerDao(LocalMediaDetailBean.class, localMediaDetailBeanDao);
     }
-    
+
     public void clear() {
         dBBeanUpLoadVideoInfoDaoConfig.clearIdentityScope();
         dBUserBeanDaoConfig.clearIdentityScope();

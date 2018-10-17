@@ -15,42 +15,45 @@ import java.util.List;
 public class DBBeanUpLoadVideoInfoUtils {
     private DBBeanUpLoadVideoInfoDao dbBeanCommentDetailDao;
 
-    public DBBeanUpLoadVideoInfoUtils  (Context context){
+    public DBBeanUpLoadVideoInfoUtils(Context context) {
         dbBeanCommentDetailDao = DaoManager.getInstance(context).getNewSession().getDBBeanUpLoadVideoInfoDao();
     }
 
     //使用单例获取操作数据库的单例
-    private static DBBeanUpLoadVideoInfoUtils dbBeanCommentDetailUtils=null;
-    public static DBBeanUpLoadVideoInfoUtils getInstance(){
-        return  dbBeanCommentDetailUtils;
+    private static DBBeanUpLoadVideoInfoUtils dbBeanCommentDetailUtils = null;
+
+    public static DBBeanUpLoadVideoInfoUtils getInstance() {
+        return dbBeanCommentDetailUtils;
     }
-    public static void Init(Context context){
-        if(dbBeanCommentDetailUtils==null){
-            dbBeanCommentDetailUtils=new DBBeanUpLoadVideoInfoUtils(context);
+
+    public static void Init(Context context) {
+        if (dbBeanCommentDetailUtils == null) {
+            dbBeanCommentDetailUtils = new DBBeanUpLoadVideoInfoUtils(context);
         }
     }
 
     /**
      * 完成对数据库中插入一条数据操作
+     *
      * @param dbBeanCommentDetail
      * @return
      */
-    public void insertOneData(DBBeanUpLoadVideoInfo dbBeanCommentDetail){
+    public void insertOneData(DBBeanUpLoadVideoInfo dbBeanCommentDetail) {
         dbBeanCommentDetailDao.insertOrReplace(dbBeanCommentDetail);
     }
 
     /**
      * 完成对数据库中插入多条数据操作
+     *
      * @param dbBeanCommentDetailList
      * @return
      */
-    public boolean insertManyData( List<DBBeanUpLoadVideoInfo> dbBeanCommentDetailList){
+    public boolean insertManyData(List<DBBeanUpLoadVideoInfo> dbBeanCommentDetailList) {
         boolean flag = false;
-        try{
+        try {
             dbBeanCommentDetailDao.insertOrReplaceInTx(dbBeanCommentDetailList);
             flag = true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return flag;
@@ -58,16 +61,16 @@ public class DBBeanUpLoadVideoInfoUtils {
 
     /**
      * 完成对数据库中删除一条数据操作
+     *
      * @param dbBeanCommentDetail
      * @return
      */
-    public boolean deleteOneData(DBBeanUpLoadVideoInfo dbBeanCommentDetail){
+    public boolean deleteOneData(DBBeanUpLoadVideoInfo dbBeanCommentDetail) {
         boolean flag = false;
-        try{
+        try {
             dbBeanCommentDetailDao.delete(dbBeanCommentDetail);
             flag = true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return flag;
@@ -75,15 +78,15 @@ public class DBBeanUpLoadVideoInfoUtils {
 
     /**
      * 完成对数据库中删除一条数据 ByKey操作
+     *
      * @return
      */
-    public boolean deleteOneDataByKey(long id){
+    public boolean deleteOneDataByKey(long id) {
         boolean flag = false;
-        try{
+        try {
             dbBeanCommentDetailDao.deleteByKey(id);
             flag = true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return flag;
@@ -91,15 +94,15 @@ public class DBBeanUpLoadVideoInfoUtils {
 
     /**
      * 完成对数据库中批量删除数据操作
+     *
      * @return
      */
-    public boolean deleteManData(List<DBBeanUpLoadVideoInfo> dbBeanCommentDetailList){
+    public boolean deleteManData(List<DBBeanUpLoadVideoInfo> dbBeanCommentDetailList) {
         boolean flag = false;
-        try{
+        try {
             dbBeanCommentDetailDao.deleteInTx(dbBeanCommentDetailList);
             flag = true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return flag;
@@ -107,15 +110,15 @@ public class DBBeanUpLoadVideoInfoUtils {
 
     /**
      * 完成对数据库更新数据操作
+     *
      * @return
      */
-    public boolean updateData(DBBeanUpLoadVideoInfo dbBeanCommentDetail){
+    public boolean updateData(DBBeanUpLoadVideoInfo dbBeanCommentDetail) {
         boolean flag = false;
-        try{
+        try {
             dbBeanCommentDetailDao.update(dbBeanCommentDetail);
             flag = true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return flag;
@@ -123,15 +126,15 @@ public class DBBeanUpLoadVideoInfoUtils {
 
     /**
      * 完成对数据库批量更新数据操作
+     *
      * @return
      */
-    public boolean updateManData(List<DBBeanUpLoadVideoInfo> dbBeanCommentDetailList){
+    public boolean updateManData(List<DBBeanUpLoadVideoInfo> dbBeanCommentDetailList) {
         boolean flag = false;
-        try{
+        try {
             dbBeanCommentDetailDao.updateInTx(dbBeanCommentDetailList);
             flag = true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return flag;
@@ -139,6 +142,7 @@ public class DBBeanUpLoadVideoInfoUtils {
 
     /**
      * 完成对数据库查询数据操作
+     *
      * @return
      */
     public DBBeanUpLoadVideoInfo queryDataByID(long commentID) {
@@ -157,6 +161,7 @@ public class DBBeanUpLoadVideoInfoUtils {
 
     /**
      * 完成对数据库查询所有数据操作
+     *
      * @return
      */
     public List<DBBeanUpLoadVideoInfo> queryData() {

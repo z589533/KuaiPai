@@ -76,8 +76,10 @@ public class CurrentUserVideoAdapter extends RecyclerView.Adapter<CurrentUserVid
     }
 
     public class CurrentUserVideoAdapterViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.ivVideoItemCurrentVideoActivity) ImageView ivVideoItemMainActivity;
-        @BindView(R.id.btn_delete_video_current_user_activity) Button mDeleteButton;
+        @BindView(R.id.ivVideoItemCurrentVideoActivity)
+        ImageView ivVideoItemMainActivity;
+        @BindView(R.id.btn_delete_video_current_user_activity)
+        Button mDeleteButton;
 
         public CurrentUserVideoAdapterViewHolder(View itemView) {
             super(itemView);

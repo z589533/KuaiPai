@@ -20,7 +20,7 @@ package com.china.snapshot.camera.capture;
  *  limitations under the License.
  *
  * All files in the folder are under this Apache License, Version 2.0.
-*/
+ */
 
 import android.Manifest;
 import android.app.Activity;
@@ -51,16 +51,15 @@ public class FilterCameraActivity extends Activity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case 1:
-                int gsize=grantResults.length;
+                int gsize = grantResults.length;
                 int grantResult = grantResults[0];
-                int flag=0;
-                for(int i=0;i<gsize;i++)
-                {
-                    if(grantResults[i]!=PackageManager.PERMISSION_GRANTED){
-                        flag=1;
+                int flag = 0;
+                for (int i = 0; i < gsize; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        flag = 1;
                     }
                 }
-                if (flag==0) {
+                if (flag == 0) {
                     startjump();
                 } else {
                     Toast.makeText(FilterCameraActivity.this, "you refused the camera function", Toast.LENGTH_SHORT).show();
@@ -71,23 +70,22 @@ public class FilterCameraActivity extends Activity {
     }
 
     public void callCamera() {
-        if(Build.VERSION.SDK_INT>21){
+        if (Build.VERSION.SDK_INT > 21) {
             String callPhone = Manifest.permission.CAMERA;
             String writestorage = Manifest.permission.WRITE_EXTERNAL_STORAGE;
             String readstorage = Manifest.permission.READ_EXTERNAL_STORAGE;
             String readsound = Manifest.permission.RECORD_AUDIO;
-            String[] permissions = new String[]{callPhone,writestorage,readstorage,readsound};
+            String[] permissions = new String[]{callPhone, writestorage, readstorage, readsound};
             int selfPermission = ActivityCompat.checkSelfPermission(this, callPhone);
             int selfwrite = ActivityCompat.checkSelfPermission(this, writestorage);
             int selfread = ActivityCompat.checkSelfPermission(this, readstorage);
             int selfsound = ActivityCompat.checkSelfPermission(this, readsound);
-            if (selfPermission != PackageManager.PERMISSION_GRANTED || selfwrite != PackageManager.PERMISSION_GRANTED || selfread != PackageManager.PERMISSION_GRANTED || selfsound!=PackageManager.PERMISSION_GRANTED) {
+            if (selfPermission != PackageManager.PERMISSION_GRANTED || selfwrite != PackageManager.PERMISSION_GRANTED || selfread != PackageManager.PERMISSION_GRANTED || selfsound != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, permissions, 1);
             } else {
                 startjump();
             }
-        }else
-        {
+        } else {
             startjump();
         }
 
@@ -101,8 +99,8 @@ public class FilterCameraActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_activity_main);
-        CameraFile.cxt=this.getApplicationContext();
-        CameraFile.filterindex=0;
+        CameraFile.cxt = this.getApplicationContext();
+        CameraFile.filterindex = 0;
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("delcamera");
 
@@ -124,12 +122,13 @@ public class FilterCameraActivity extends Activity {
     }
 
     AlertDialog ad;
+
     public void showDialog(Context context) {
-        View view=this.getLayoutInflater().inflate(R.layout.camera_droplayout,null);
+        View view = this.getLayoutInflater().inflate(R.layout.camera_droplayout, null);
         view.findViewById(R.id.camera_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ad!=null)
+                if (ad != null)
                     ad.dismiss();
                 FilterCameraActivity.this.finish();
             }
@@ -137,14 +136,14 @@ public class FilterCameraActivity extends Activity {
         view.findViewById(R.id.camera_cancal).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ad!=null)
+                if (ad != null)
                     ad.dismiss();
             }
         });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(view);
-        ad=builder.show();
+        ad = builder.show();
     }
 
     private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
@@ -160,7 +159,7 @@ public class FilterCameraActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        CameraFile.filterindex=0;
+        CameraFile.filterindex = 0;
     }
 
     @Override

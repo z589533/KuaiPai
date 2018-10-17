@@ -10,7 +10,8 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity // 标识实体类，greenDAO会映射成sqlite的一个表，表名为实体类名的大写形式
 public class LocalMediaDetailBean {
-    @Id(autoincrement = false) public long creatTimeAsId;  //把创建时间作为表的ID
+    @Id(autoincrement = false)
+    public long creatTimeAsId;  //把创建时间作为表的ID
     @Property(nameInDb = "LocalMediaDetailBean")
     public String locationDesc;
     public String mediaUrl;

@@ -34,12 +34,18 @@ import cn.bmob.v3.listener.UploadBatchListener;
 
 public class ShareActivity extends BaseActivity {
 
-    @BindView(R.id.CustomVideoViewShareActivity) CustomVideoView mCustomVideoView;
-    @BindView(R.id.tvBackShareActivity) TextView mBackTextView;
-    @BindView(R.id.tvFinishShareActivity) TextView mFinishTextView;
-    @BindView(R.id.descriptionShareActivity) EditText mDescriptionEditText;
-    @BindView(R.id.titleBar) RelativeLayout titleBar;
-    @BindView(R.id.flikerBarShareActivity) FlikerProgressBar flikerBar;
+    @BindView(R.id.CustomVideoViewShareActivity)
+    CustomVideoView mCustomVideoView;
+    @BindView(R.id.tvBackShareActivity)
+    TextView mBackTextView;
+    @BindView(R.id.tvFinishShareActivity)
+    TextView mFinishTextView;
+    @BindView(R.id.descriptionShareActivity)
+    EditText mDescriptionEditText;
+    @BindView(R.id.titleBar)
+    RelativeLayout titleBar;
+    @BindView(R.id.flikerBarShareActivity)
+    FlikerProgressBar flikerBar;
     public static final String KEY_FILE_PATH = "KEY_FILE_PATH";
     public static final String KEY_PICTURE_PATH = "KEY_PICTURE_PATH";
     private String filePath;

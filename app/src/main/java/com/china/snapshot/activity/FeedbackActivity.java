@@ -23,10 +23,14 @@ import cn.bmob.v3.listener.SaveListener;
 
 public class FeedbackActivity extends BaseBarActivity {
 
-    @BindView(R.id.edtFeedbackActivityFeedback) EditText edtFeedbackActivityFeedback;
-    @BindView(R.id.edtFeedbackActivityEmail) EditText edtFeedbackActivityEmail;
-    @BindView(R.id.llFeedbackActivityCommit) LinearLayout llFeedbackActivityCommit;
-    @BindView(R.id.cbFeedbackActivitySendBlogIcon) CheckBox cbFeedbackActivitySendBlogIcon;
+    @BindView(R.id.edtFeedbackActivityFeedback)
+    EditText edtFeedbackActivityFeedback;
+    @BindView(R.id.edtFeedbackActivityEmail)
+    EditText edtFeedbackActivityEmail;
+    @BindView(R.id.llFeedbackActivityCommit)
+    LinearLayout llFeedbackActivityCommit;
+    @BindView(R.id.cbFeedbackActivitySendBlogIcon)
+    CheckBox cbFeedbackActivitySendBlogIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

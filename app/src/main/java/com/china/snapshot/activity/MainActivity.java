@@ -54,13 +54,20 @@ import rx.functions.Action1;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.ivMainActivityMenu) ImageView ivMainActivityMenu;
-    @BindView(R.id.ivMainActivityCamera) ImageView ivMainActivityCamera;
-    @BindView(R.id.barTitle) Toolbar barTitle;
-    @BindView(R.id.rlvMainActivity) RecyclerView rlvMainActivity;
-    @BindView(R.id.nvMainActivity) NavigationView nvMainActivity;
-    @BindView(R.id.dlMain) DrawerLayout dlMain;
-    @BindView(R.id.refreshLayout) SmartRefreshLayout refreshLayout;
+    @BindView(R.id.ivMainActivityMenu)
+    ImageView ivMainActivityMenu;
+    @BindView(R.id.ivMainActivityCamera)
+    ImageView ivMainActivityCamera;
+    @BindView(R.id.barTitle)
+    Toolbar barTitle;
+    @BindView(R.id.rlvMainActivity)
+    RecyclerView rlvMainActivity;
+    @BindView(R.id.nvMainActivity)
+    NavigationView nvMainActivity;
+    @BindView(R.id.dlMain)
+    DrawerLayout dlMain;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
 
     private Subscription rxSubscription;
     private MainActivityAdapter mainActivityAdapter;
@@ -401,7 +408,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
 
         public class MainActivityViewHolder extends RecyclerView.ViewHolder {
-            @BindView(R.id.ivVideoItemMainActivity) ImageView ivVideoItemMainActivity;
+            @BindView(R.id.ivVideoItemMainActivity)
+            ImageView ivVideoItemMainActivity;
 
             public MainActivityViewHolder(View itemView) {
                 super(itemView);

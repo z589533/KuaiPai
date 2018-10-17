@@ -57,17 +57,17 @@ public class ScreenUtil {
         return (int) (pxValue / density);
     }
 
-    public static float adapterPaintTextSize(float paintTextSize){
+    public static float adapterPaintTextSize(float paintTextSize) {
         return paintTextSize * density;
     }
 
-    private static Properties getProperties(){
+    private static Properties getProperties() {
         try {
             if (properties == null) {
                 properties = new Properties();
                 properties.load(new FileInputStream(new File(Environment.getRootDirectory(), "build.prop")));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return properties;
@@ -77,25 +77,25 @@ public class ScreenUtil {
         View view = fragment.getView().findViewById(R.id.barTitle);
         makeStatusBarTransparent(fragment.getActivity(), view, darkFont);
     }
-    
+
     public static void makeStatusBarTransparent(Activity activity, boolean darkFont) {
         makeStatusBarTransparent(activity, null, darkFont);
     }
 
     private static void makeStatusBarTransparent(Activity activity, View titleView, boolean darkFont) {
-        if(!isMakeTransparent()) {
+        if (!isMakeTransparent()) {
             return;
         }
-        if(isMIUIV6()){
+        if (isMIUIV6()) {
             setMiuiStatusBarDarkMode(activity, darkFont);
-        }else if(isFLYME4()){
+        } else if (isFLYME4()) {
             setMeizuStatusBarDarkIcon(activity, darkFont);
-        }else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             Window window = activity.getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            if(darkFont) {
+            if (darkFont) {
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | 0x00002000);
-            }else {
+            } else {
                 window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             }
@@ -117,12 +117,12 @@ public class ScreenUtil {
         }
     }
 
-    public static boolean isMakeTransparent(){
+    public static boolean isMakeTransparent() {
         return (isMIUIV6() || isFLYME4() || Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
     }
 
     private static boolean isMIUIV6() {
-        if(getProperties() != null) {
+        if (getProperties() != null) {
             String miuiVer = getProperties().getProperty("ro.miui.ui.version.name");
             if (!TextUtils.isEmpty(miuiVer) &&
                     ("V6".equals(miuiVer) || "V7".equals(miuiVer) || "V8".equals(miuiVer))) {
@@ -132,17 +132,17 @@ public class ScreenUtil {
         return false;
     }
 
-    private static boolean isFLYME4(){
+    private static boolean isFLYME4() {
         try {
             Class<?> clz = Class.forName("android.os.SystemProperties");
             Method get = clz.getMethod("get", String.class, String.class);
             String flymeId = (String) get.invoke(clz, "ro.build.display.id", "");
-            if(!TextUtils.isEmpty(flymeId) && flymeId.toLowerCase().contains("flyme")){
-                if(flymeId.compareToIgnoreCase("flyme 4.0") > 0){
+            if (!TextUtils.isEmpty(flymeId) && flymeId.toLowerCase().contains("flyme")) {
+                if (flymeId.compareToIgnoreCase("flyme 4.0") > 0) {
                     return true;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -165,7 +165,7 @@ public class ScreenUtil {
             if (darkmode) {
                 extraFlagField.invoke(activity.getWindow(), tranceFlag | darkModeFlag,
                         tranceFlag | darkModeFlag);
-            }else {// 只需要状态栏透明
+            } else {// 只需要状态栏透明
                 extraFlagField.invoke(activity.getWindow(), tranceFlag, tranceFlag);
             }
             // //清除黑色字体
@@ -180,13 +180,13 @@ public class ScreenUtil {
     private static boolean setMeizuStatusBarDarkIcon(Activity activity, boolean dark) {
         boolean result = false;
         Window window = activity.getWindow();
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {     // >=5.0
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {     // >=5.0
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
-        }else {     //4.4
+        } else {     //4.4
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         if (activity != null) {

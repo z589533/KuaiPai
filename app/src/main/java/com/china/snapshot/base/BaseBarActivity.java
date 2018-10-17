@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.china.snapshot.R;
 
-public class BaseBarActivity extends BaseActivity implements View.OnClickListener{
+public class BaseBarActivity extends BaseActivity implements View.OnClickListener {
 
     protected Toolbar titleBar;
     private TextView tvTitle;

@@ -183,7 +183,7 @@ public class RotateLoading extends View {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                if(rotateLodingListenner != null){
+                if (rotateLodingListenner != null) {
                     rotateLodingListenner.onStop();
                 }
             }

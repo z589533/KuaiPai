@@ -41,12 +41,18 @@ import cn.bmob.v3.listener.UpdateListener;
 
 public class MediaPlayerActivity extends BaseActivity {
 
-    @BindView(R.id.cusVideoViewMediaPlayerActivity) CustomVideoView cusVideoView;
-    @BindView(R.id.ivVideoViewMediaPlayerActivity) ImageView mImageViewBg;
-    @BindView(R.id.btn_share_media_player_activity) Button btnShareMediaPlayerActivity;
-    @BindView(R.id.cb_like_media_player_activity) CheckBox mLikeCheckBox;
-    @BindView(R.id.tv_like_media_player_activity) TextView mLikeTextView;
-    @BindView(R.id.ll_like_media_player_activity) LinearLayout mLike;
+    @BindView(R.id.cusVideoViewMediaPlayerActivity)
+    CustomVideoView cusVideoView;
+    @BindView(R.id.ivVideoViewMediaPlayerActivity)
+    ImageView mImageViewBg;
+    @BindView(R.id.btn_share_media_player_activity)
+    Button btnShareMediaPlayerActivity;
+    @BindView(R.id.cb_like_media_player_activity)
+    CheckBox mLikeCheckBox;
+    @BindView(R.id.tv_like_media_player_activity)
+    TextView mLikeTextView;
+    @BindView(R.id.ll_like_media_player_activity)
+    LinearLayout mLike;
 
     private String mediaName;
     private String mediaUrl;

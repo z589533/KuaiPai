@@ -20,7 +20,7 @@ package com.china.snapshot.camera.capture;
  *  limitations under the License.
  *
  * All files in the folder are under this Apache License, Version 2.0.
-*/
+ */
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -235,7 +235,8 @@ public final class CameraGLView extends GLSurfaceView {
             // This renderer required OES_EGL_image_external extension
             final String extensions = GLES20.glGetString(GLES20.GL_EXTENSIONS);    // API >= 8
 //			if (DEBUG) Log.i(TAG, "onSurfaceCreated:Gl extensions: " + extensions);
-            if (!extensions.contains("OES_EGL_image_external")) throw new RuntimeException("This system does not support OES_EGL_image_external.");
+            if (!extensions.contains("OES_EGL_image_external"))
+                throw new RuntimeException("This system does not support OES_EGL_image_external.");
             // create textur ID
             hTex = GLFilter.initTex();
             // create SurfaceTexture with texture ID.

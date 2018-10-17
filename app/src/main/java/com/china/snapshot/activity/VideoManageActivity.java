@@ -53,26 +53,46 @@ import rx.schedulers.Schedulers;
 import static com.china.snapshot.base.BaseApplication.uploadingInfoPositionList;
 
 public class VideoManageActivity extends BaseActivity {
-    @BindView(R.id.tvVideoManageActivityTitle1) TextView tvVideoManageActivityTitle1;
-    @BindView(R.id.tvVideoManageActivitySelect1) TextView tvVideoManageActivitySelect1;
-    @BindView(R.id.ivVideoManageActivityBack1) ImageView ivVideoManageActivityBack1;
-    @BindView(R.id.rlVideoManageActivityToolbar1) RelativeLayout rlVideoManageActivityToolbar1;
-    @BindView(R.id.ivVideoManageActivityBack2) ImageView ivVideoManageActivityBack2;
-    @BindView(R.id.tvVideoManageActivityVideoCount2) TextView tvVideoManageActivityVideoCount2;
-    @BindView(R.id.tvVideoManageActivitySelectAll2) TextView tvVideoManageActivitySelectAll2;
-    @BindView(R.id.tvVideoManageActivityCancel2) TextView tvVideoManageActivityCancel2;
-    @BindView(R.id.rlVideoManageActivityToolbar2) RelativeLayout rlVideoManageActivityToolbar2;
-    @BindView(R.id.barTitle) Toolbar barTitle;
-    @BindView(R.id.tvVideoManageActivityLine) TextView tvVideoManageActivityLine;
-    @BindView(R.id.ivVideoManageActivityBlankPageImage) ImageView ivVideoManageActivityBlankPageImage;
-    @BindView(R.id.tvVideoManageActivityBlankPageText) TextView tvVideoManageActivityBlankPageText;
-    @BindView(R.id.rlVideoManageActivity) RecyclerView rlVideoManageActivity;
-    @BindView(R.id.tvVideoManageActivityUploadLine2) TextView tvVideoManageActivityUploadLine2;
-    @BindView(R.id.llVideoManageActivityUpLoad2) LinearLayout llVideoManageActivityUpLoad2;
-    @BindView(R.id.llVideoManageActivityDelete2) LinearLayout llVideoManageActivityDelete2;
-    @BindView(R.id.llVideoManageActivityUploadAndDelete2) LinearLayout llVideoManageActivityUploadAndDelete2;
-    @BindView(R.id.ivVideoManageActivityUpLoad2) ImageView ivVideoManageActivityUpLoad2;
-    @BindView(R.id.ivVideoManageActivityDelete2) ImageView ivVideoManageActivityDelete2;
+    @BindView(R.id.tvVideoManageActivityTitle1)
+    TextView tvVideoManageActivityTitle1;
+    @BindView(R.id.tvVideoManageActivitySelect1)
+    TextView tvVideoManageActivitySelect1;
+    @BindView(R.id.ivVideoManageActivityBack1)
+    ImageView ivVideoManageActivityBack1;
+    @BindView(R.id.rlVideoManageActivityToolbar1)
+    RelativeLayout rlVideoManageActivityToolbar1;
+    @BindView(R.id.ivVideoManageActivityBack2)
+    ImageView ivVideoManageActivityBack2;
+    @BindView(R.id.tvVideoManageActivityVideoCount2)
+    TextView tvVideoManageActivityVideoCount2;
+    @BindView(R.id.tvVideoManageActivitySelectAll2)
+    TextView tvVideoManageActivitySelectAll2;
+    @BindView(R.id.tvVideoManageActivityCancel2)
+    TextView tvVideoManageActivityCancel2;
+    @BindView(R.id.rlVideoManageActivityToolbar2)
+    RelativeLayout rlVideoManageActivityToolbar2;
+    @BindView(R.id.barTitle)
+    Toolbar barTitle;
+    @BindView(R.id.tvVideoManageActivityLine)
+    TextView tvVideoManageActivityLine;
+    @BindView(R.id.ivVideoManageActivityBlankPageImage)
+    ImageView ivVideoManageActivityBlankPageImage;
+    @BindView(R.id.tvVideoManageActivityBlankPageText)
+    TextView tvVideoManageActivityBlankPageText;
+    @BindView(R.id.rlVideoManageActivity)
+    RecyclerView rlVideoManageActivity;
+    @BindView(R.id.tvVideoManageActivityUploadLine2)
+    TextView tvVideoManageActivityUploadLine2;
+    @BindView(R.id.llVideoManageActivityUpLoad2)
+    LinearLayout llVideoManageActivityUpLoad2;
+    @BindView(R.id.llVideoManageActivityDelete2)
+    LinearLayout llVideoManageActivityDelete2;
+    @BindView(R.id.llVideoManageActivityUploadAndDelete2)
+    LinearLayout llVideoManageActivityUploadAndDelete2;
+    @BindView(R.id.ivVideoManageActivityUpLoad2)
+    ImageView ivVideoManageActivityUpLoad2;
+    @BindView(R.id.ivVideoManageActivityDelete2)
+    ImageView ivVideoManageActivityDelete2;
 
     private VideoManageActivityAdapter videoManageActivityAdapter;
     private List<DBBeanUpLoadVideoInfo> dbBeanUpLoadVideoInfoList;
@@ -498,14 +518,15 @@ public class VideoManageActivity extends BaseActivity {
             });
         }
 
-        public void CancelUploadingState(DBBeanUpLoadVideoInfo dbBeanUpLoadVideoInfo){
-            for (int i=0;i<BaseApplication.uploadingInfoPositionList.size();i++){
-                if (dbBeanUpLoadVideoInfo.getCreatTimeAsId() == BaseApplication.uploadingInfoPositionList.get(i).id){
+        public void CancelUploadingState(DBBeanUpLoadVideoInfo dbBeanUpLoadVideoInfo) {
+            for (int i = 0; i < BaseApplication.uploadingInfoPositionList.size(); i++) {
+                if (dbBeanUpLoadVideoInfo.getCreatTimeAsId() == BaseApplication.uploadingInfoPositionList.get(i).id) {
                     UploadInfoState uploadInfoState = BaseApplication.uploadingInfoPositionList.get(i);
                     BaseApplication.uploadingInfoPositionList.remove(uploadInfoState);
                 }
             }
         }
+
         @Override
         public int getItemCount() {
             return bitmapList.size();
@@ -517,14 +538,22 @@ public class VideoManageActivity extends BaseActivity {
 
         class VideoManageActivityViewHolder extends RecyclerView.ViewHolder {
 
-            @BindView(R.id.ivVideoManageActivityItemPicture) ImageView ivVideoManageActivityItemPicture;
-            @BindView(R.id.ivVideoManageActivityItemUploadCover) ImageView ivVideoManageActivityItemUploadCover;
-            @BindView(R.id.cbVideoManageActivityItemUpload1) CheckBox cbVideoManageActivityItemUpload1;
-            @BindView(R.id.llVideoManageActivityItemUpload1) LinearLayout llVideoManageActivityItemUpload1;
-            @BindView(R.id.cbVideoManageActivityItemSelected2) CheckBox cbVideoManageActivityItemSelected2;
-            @BindView(R.id.llVideoManageActivityItemSelected2) LinearLayout llVideoManageActivityItemSelected2;
-            @BindView(R.id.tvVideoManageActivityItemUploadingText) TextView tvVideoManageActivityItemUploadingText;
-            @BindView(R.id.crvVideoManageActivityItem) CardView crvVideoManageActivityItem;
+            @BindView(R.id.ivVideoManageActivityItemPicture)
+            ImageView ivVideoManageActivityItemPicture;
+            @BindView(R.id.ivVideoManageActivityItemUploadCover)
+            ImageView ivVideoManageActivityItemUploadCover;
+            @BindView(R.id.cbVideoManageActivityItemUpload1)
+            CheckBox cbVideoManageActivityItemUpload1;
+            @BindView(R.id.llVideoManageActivityItemUpload1)
+            LinearLayout llVideoManageActivityItemUpload1;
+            @BindView(R.id.cbVideoManageActivityItemSelected2)
+            CheckBox cbVideoManageActivityItemSelected2;
+            @BindView(R.id.llVideoManageActivityItemSelected2)
+            LinearLayout llVideoManageActivityItemSelected2;
+            @BindView(R.id.tvVideoManageActivityItemUploadingText)
+            TextView tvVideoManageActivityItemUploadingText;
+            @BindView(R.id.crvVideoManageActivityItem)
+            CardView crvVideoManageActivityItem;
 
             public VideoManageActivityViewHolder(View itemView) {
                 super(itemView);
