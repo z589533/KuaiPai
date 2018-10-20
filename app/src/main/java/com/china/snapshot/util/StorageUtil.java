@@ -278,8 +278,9 @@ public class StorageUtil {
             String line = "";
             String result = "";
             while ((line = bufReader.readLine()) != null) {
-                if (line.trim().equals(""))
+                if ("".equals(line.trim())) {
                     continue;
+                }
                 result += line + "\r\n";
             }
             return result;

@@ -129,13 +129,17 @@ public class CameraFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
-                if (ad != null) ad.dismiss();
+                if (ad != null) {
+                    ad.dismiss();
+                }
             }
         });
         view.findViewById(R.id.camera_cancal).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ad != null) ad.dismiss();
+                if (ad != null) {
+                    ad.dismiss();
+                }
             }
         });
 
@@ -248,10 +252,14 @@ public class CameraFragment extends Fragment {
                         getActivity().startActivity(intent);
                         break;
                     case 6:
-                        if (rl_focus != null) rl_focus.setVisibility(View.GONE);
+                        if (rl_focus != null) {
+                            rl_focus.setVisibility(View.GONE);
+                        }
                         break;
                     case 7:
-                        if (rl_focus != null) rl_focus.setVisibility(View.GONE);
+                        if (rl_focus != null) {
+                            rl_focus.setVisibility(View.GONE);
+                        }
                         Record();
                         break;
                 }
@@ -278,7 +286,9 @@ public class CameraFragment extends Fragment {
                 if (recordsize > 0) {
                     String fpath = filelist.get(recordsize - 1);
                     File file = new File(fpath);
-                    if (file.exists()) file.delete();
+                    if (file.exists()) {
+                        file.delete();
+                    }
                     filelist.remove(recordsize - 1);
                     capture.delRecord();
                     if (recordsize == 1) {
@@ -371,10 +381,10 @@ public class CameraFragment extends Fragment {
         List<Track> audioTracks = new LinkedList<Track>();
         for (Movie m : moviesList) {
             for (Track t : m.getTracks()) {
-                if (t.getHandler().equals("soun")) {
+                if ("soun".equals(t.getHandler())) {
                     audioTracks.add(t);
                 }
-                if (t.getHandler().equals("vide")) {
+                if ("vide".equals(t.getHandler())) {
                     videoTracks.add(t);
                 }
             }
@@ -414,7 +424,9 @@ public class CameraFragment extends Fragment {
     public void onResume() {
         super.onResume();
         CameraFile.camerastaus = 0;
-        if (DEBUG) Log.v(TAG, "onResume:");
+        if (DEBUG) {
+            Log.v(TAG, "onResume:");
+        }
         CameraGLView.CAMERA_ID = Camera.CameraInfo.CAMERA_FACING_BACK;
         camerid = CameraGLView.CAMERA_ID;
         mCameraView.onResume();
@@ -427,7 +439,9 @@ public class CameraFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (DEBUG) Log.v(TAG, "onPause:");
+        if (DEBUG) {
+            Log.v(TAG, "onPause:");
+        }
         stopRecording(true);
         mCameraView.onPause();
     }
@@ -507,9 +521,13 @@ public class CameraFragment extends Fragment {
             showToast(R.string.audio_permission);
         }
         if (recording) {
-            if (!stopRecording(false)) return;
+            if (!stopRecording(false)) {
+                return;
+            }
         } else {
-            if (capture.getAngle() < 360) Foncus(7);
+            if (capture.getAngle() < 360) {
+                Foncus(7);
+            }
         }
     }
 
@@ -541,7 +559,9 @@ public class CameraFragment extends Fragment {
      */
     private String startRecording() {
         String filepath = null;
-        if (DEBUG) Log.v(TAG, "startRecording:");
+        if (DEBUG) {
+            Log.v(TAG, "startRecording:");
+        }
         try {
             mMuxer = new MuxerWrapper(".mp4");
             float ww = mCameraView.getVideoWidth();
@@ -603,14 +623,22 @@ public class CameraFragment extends Fragment {
     private final MediaEncoder.MediaEncoderListener mMediaEncoderListener = new MediaEncoder.MediaEncoderListener() {
         @Override
         public void onPrepared(final MediaEncoder encoder) {
-            if (DEBUG) Log.v(TAG, "onPrepared:encoder=" + encoder);
-            if (encoder instanceof VideoEncoder) mCameraView.setVideoEncoder((VideoEncoder) encoder);
+            if (DEBUG) {
+                Log.v(TAG, "onPrepared:encoder=" + encoder);
+            }
+            if (encoder instanceof VideoEncoder) {
+                mCameraView.setVideoEncoder((VideoEncoder) encoder);
+            }
         }
 
         @Override
         public void onStopped(final MediaEncoder encoder) {
-            if (DEBUG) Log.v(TAG, "onStopped:encoder=" + encoder);
-            if (encoder instanceof VideoEncoder) mCameraView.setVideoEncoder(null);
+            if (DEBUG) {
+                Log.v(TAG, "onStopped:encoder=" + encoder);
+            }
+            if (encoder instanceof VideoEncoder) {
+                mCameraView.setVideoEncoder(null);
+            }
         }
     };
 
@@ -653,7 +681,9 @@ public class CameraFragment extends Fragment {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             float dx = e1.getX() - e2.getX();
-            if (dx < 0) dx = -dx;
+            if (dx < 0) {
+                dx = -dx;
+            }
             if (dx > 40 && velocityX > 0 && recording == false) {
                 switchFilter(1);
                 return true;

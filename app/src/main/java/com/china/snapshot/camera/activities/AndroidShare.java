@@ -232,7 +232,7 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
         }
 
         Intent intent = new Intent("android.intent.action.SEND");
-        if ((imgPath == null) || (imgPath.equals(""))) {
+        if ((imgPath == null) || ("".equals(imgPath))) {
             intent.setType("text/plain");
         } else {
             File f = new File(imgPath);
@@ -256,7 +256,7 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
     private File getFileCache() {
         File cache = null;
 
-        if (Environment.getExternalStorageState().equals("mounted")) {
+        if ("mounted".equals(Environment.getExternalStorageState())) {
             cache = new File(Environment.getExternalStorageDirectory() + "/." + getContext().getPackageName());
         } else {
             cache = new File(getContext().getCacheDir().getAbsolutePath() + "/." + getContext().getPackageName());

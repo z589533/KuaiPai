@@ -34,6 +34,7 @@ import com.china.snapshot.camera.glutils.CameraFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -43,7 +44,15 @@ public class MuxerWrapper {
     private static final String TAG = "MuxerWrapper";
 
     private static final String DIR_NAME = "AVRecSample";
-    private static final SimpleDateFormat mDateTimeFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.US);
+//    private static final SimpleDateFormat mDateTimeFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.US);
+
+
+    private static final ThreadLocal<DateFormat> mDateTimeFormat = new ThreadLocal<DateFormat>() {
+        @Override
+        protected DateFormat initialValue() {
+            return new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.US);
+        }
+    };
 
     private String mOutputPath;
     private final MediaMuxer mMediaMuxer;    // API >= 18
@@ -68,7 +77,9 @@ public class MuxerWrapper {
      * @throws IOException
      */
     public MuxerWrapper(String ext) throws IOException {
-        if (TextUtils.isEmpty(ext)) ext = ".mp4";
+        if (TextUtils.isEmpty(ext)) {
+            ext = ".mp4";
+        }
         String parent = CameraFile.getVideoTemp();
         mOutputPath = parent + System.currentTimeMillis() + ".mp4";
         mMediaMuxer = new MediaMuxer(mOutputPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
@@ -81,26 +92,32 @@ public class MuxerWrapper {
     }
 
     public void prepare() throws IOException {
-        if (mVideoEncoder != null)
+        if (mVideoEncoder != null) {
             mVideoEncoder.prepare();
-        if (mAudioEncoder != null)
+        }
+        if (mAudioEncoder != null) {
             mAudioEncoder.prepare();
+        }
     }
 
     public void startRecording() {
-        if (mVideoEncoder != null)
+        if (mVideoEncoder != null) {
             mVideoEncoder.startRecording();
-        if (mAudioEncoder != null)
+        }
+        if (mAudioEncoder != null) {
             mAudioEncoder.startRecording();
+        }
         t1 = System.currentTimeMillis();
     }
 
     public void stopRecording() {
-        if (mVideoEncoder != null)
+        if (mVideoEncoder != null) {
             mVideoEncoder.stopRecording();
+        }
         mVideoEncoder = null;
-        if (mAudioEncoder != null)
+        if (mAudioEncoder != null) {
             mAudioEncoder.stopRecording();
+        }
         mAudioEncoder = null;
         t2 = System.currentTimeMillis();
     }
@@ -119,15 +136,18 @@ public class MuxerWrapper {
      */
     /*package*/ void addEncoder(final MediaEncoder encoder) {
         if (encoder instanceof VideoEncoder) {
-            if (mVideoEncoder != null)
+            if (mVideoEncoder != null) {
                 throw new IllegalArgumentException("Video encoder already added.");
+            }
             mVideoEncoder = encoder;
         } else if (encoder instanceof AudioEncoder) {
-            if (mAudioEncoder != null)
+            if (mAudioEncoder != null) {
                 throw new IllegalArgumentException("Video encoder already added.");
+            }
             mAudioEncoder = encoder;
-        } else
+        } else {
             throw new IllegalArgumentException("unsupported encoder");
+        }
         mEncoderCount = (mVideoEncoder != null ? 1 : 0) + (mAudioEncoder != null ? 1 : 0);
     }
 
@@ -138,13 +158,17 @@ public class MuxerWrapper {
      */
     /*package*/
     synchronized boolean start() {
-        if (DEBUG) Log.v(TAG, "start:");
+        if (DEBUG) {
+            Log.v(TAG, "start:");
+        }
         mStatredCount++;
         if ((mEncoderCount > 0) && (mStatredCount == mEncoderCount)) {
             mMediaMuxer.start();
             mIsStarted = true;
             notifyAll();
-            if (DEBUG) Log.v(TAG, "MediaMuxer started:");
+            if (DEBUG) {
+                Log.v(TAG, "MediaMuxer started:");
+            }
         }
         return mIsStarted;
     }
@@ -154,13 +178,17 @@ public class MuxerWrapper {
      */
     /*package*/
     synchronized void stop() {
-        if (DEBUG) Log.v(TAG, "stop:mStatredCount=" + mStatredCount);
+        if (DEBUG) {
+            Log.v(TAG, "stop:mStatredCount=" + mStatredCount);
+        }
         mStatredCount--;
         if ((mEncoderCount > 0) && (mStatredCount <= 0)) {
             mMediaMuxer.stop();
             mMediaMuxer.release();
             mIsStarted = false;
-            if (DEBUG) Log.v(TAG, "MediaMuxer stopped:");
+            if (DEBUG) {
+                Log.v(TAG, "MediaMuxer stopped:");
+            }
         }
     }
 
@@ -172,10 +200,13 @@ public class MuxerWrapper {
      */
     /*package*/
     synchronized int addTrack(final MediaFormat format) {
-        if (mIsStarted)
+        if (mIsStarted) {
             throw new IllegalStateException("muxer already started");
+        }
         final int trackIx = mMediaMuxer.addTrack(format);
-        if (DEBUG) Log.i(TAG, "addTrack:trackNum=" + mEncoderCount + ",trackIx=" + trackIx + ",format=" + format);
+        if (DEBUG) {
+            Log.i(TAG, "addTrack:trackNum=" + mEncoderCount + ",trackIx=" + trackIx + ",format=" + format);
+        }
         return trackIx;
     }
 
@@ -188,8 +219,9 @@ public class MuxerWrapper {
      */
     /*package*/
     synchronized void writeSampleData(final int trackIndex, final ByteBuffer byteBuf, final MediaCodec.BufferInfo bufferInfo) {
-        if (mStatredCount > 0)
+        if (mStatredCount > 0) {
             mMediaMuxer.writeSampleData(trackIndex, byteBuf, bufferInfo);
+        }
     }
 
 //**********************************************************************
@@ -219,6 +251,6 @@ public class MuxerWrapper {
      */
     private static final String getDateTimeString() {
         final GregorianCalendar now = new GregorianCalendar();
-        return mDateTimeFormat.format(now.getTime());
+        return mDateTimeFormat.get().format(now.getTime());
     }
 }

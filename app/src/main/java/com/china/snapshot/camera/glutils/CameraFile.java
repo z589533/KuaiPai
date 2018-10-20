@@ -19,16 +19,18 @@ public class CameraFile {
     public static String getVideoPath() {
         String parent = Environment.getExternalStorageDirectory().getPath() + "/" + "DCIM/yivideo/";
         File file = new File(parent);
-        if (!file.exists())
+        if (!file.exists()) {
             file.mkdir();
+        }
         return parent;
     }
 
     public static String getVideoTemp() {
         String parent = Environment.getExternalStorageDirectory().getPath() + "/" + "DCIM/yivideotmp/";
         File file = new File(parent);
-        if (!file.exists())
+        if (!file.exists()) {
             file.mkdir();
+        }
         return parent;
     }
 
@@ -48,12 +50,14 @@ public class CameraFile {
 
     //filename  视频文件名
     public static void recordMeta(String filename, String record, String pos, String status) {
-        if (filename == null || (!filename.endsWith(".mp4")))
+        if (filename == null || (!filename.endsWith(".mp4"))) {
             return;
+        }
         String filetxt = filename.replaceFirst(".mp4", ".txt");
         File file = new File(filetxt);
-        if (file.exists())
+        if (file.exists()) {
             file.delete();
+        }
         try {
             file.createNewFile();
             PrintWriter pw = new PrintWriter(file);

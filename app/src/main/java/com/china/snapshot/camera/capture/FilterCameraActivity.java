@@ -128,16 +128,18 @@ public class FilterCameraActivity extends Activity {
         view.findViewById(R.id.camera_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ad != null)
+                if (ad != null) {
                     ad.dismiss();
+                }
                 FilterCameraActivity.this.finish();
             }
         });
         view.findViewById(R.id.camera_cancal).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ad != null)
+                if (ad != null) {
                     ad.dismiss();
+                }
             }
         });
 
@@ -150,7 +152,7 @@ public class FilterCameraActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals("delcamera")) {
+            if ("delcamera".equals(action)) {
                 FilterCameraActivity.this.finish();
             }
         }

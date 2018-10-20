@@ -17,8 +17,9 @@ public class GLFilter {
         } else {
             if (ff > 0) {
                 filterindex++;
-                if (filterindex >= filternum)
+                if (filterindex >= filternum) {
                     filterindex = 0;
+                }
             } else {
                 filterindex--;
                 if (filterindex < 0) {
@@ -27,14 +28,16 @@ public class GLFilter {
             }
         }
         CameraFile.filterindex = filterindex;
-        if (filtercur != null)
+        if (filtercur != null) {
             filtercur.setFlag(filterindex);
+        }
 
     }
 
     public void setMatrix(final float[] matrix, final int offset) {
-        if (filtercur != null)
+        if (filtercur != null) {
             filtercur.setMatrix(matrix, offset);
+        }
     }
 
     public static void deleteTex() {
@@ -64,12 +67,14 @@ public class GLFilter {
     }
 
     public void release() {
-        if (filtercur != null)
+        if (filtercur != null) {
             filtercur.release();
+        }
     }
 
     public void draw(final int tex_id, final float[] tex_matrix, float singlestep1, float singlestep2) {
-        if (filtercur != null)
+        if (filtercur != null) {
             filtercur.draw(tex_id, tex_matrix, 0, 0);
+        }
     }
 }

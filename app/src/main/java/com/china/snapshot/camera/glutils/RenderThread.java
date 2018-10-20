@@ -56,7 +56,9 @@ public final class RenderThread implements Runnable {
     }
 
     public static final RenderThread createHandler(final String name) {
-        if (DEBUG) Log.v(TAG, "createHandler:");
+        if (DEBUG) {
+            Log.v(TAG, "createHandler:");
+        }
         final RenderThread handler = new RenderThread();
         synchronized (handler.mSync) {
             new Thread(handler, !TextUtils.isEmpty(name) ? name : TAG).start();
@@ -69,11 +71,16 @@ public final class RenderThread implements Runnable {
     }
 
     public final void setEglContext(final EGLContext shared_context, final int tex_id, final Object surface, final boolean isRecordable) {
-        if (DEBUG) Log.i(TAG, "setEglContext:");
-        if (!(surface instanceof Surface) && !(surface instanceof SurfaceTexture) && !(surface instanceof SurfaceHolder))
+        if (DEBUG) {
+            Log.i(TAG, "setEglContext:");
+        }
+        if (!(surface instanceof Surface) && !(surface instanceof SurfaceTexture) && !(surface instanceof SurfaceHolder)) {
             throw new RuntimeException("unsupported window type:" + surface);
+        }
         synchronized (mSync) {
-            if (mRequestRelease) return;
+            if (mRequestRelease) {
+                return;
+            }
             mShard_context = shared_context;
             mTexId = tex_id;
             mSurface = surface;
@@ -111,7 +118,9 @@ public final class RenderThread implements Runnable {
 
     public final void draw(final int tex_id, final float[] tex_matrix, final float[] mvp_matrix) {
         synchronized (mSync) {
-            if (mRequestRelease) return;
+            if (mRequestRelease) {
+                return;
+            }
             mTexId = tex_id;
             if ((tex_matrix != null) && (tex_matrix.length >= 16)) {
                 System.arraycopy(tex_matrix, 0, mMatrix, 0, 16);
@@ -139,9 +148,13 @@ public final class RenderThread implements Runnable {
     }
 
     public final void release() {
-        if (DEBUG) Log.i(TAG, "release:");
+        if (DEBUG) {
+            Log.i(TAG, "release:");
+        }
         synchronized (mSync) {
-            if (mRequestRelease) return;
+            if (mRequestRelease) {
+                return;
+            }
             mRequestRelease = true;
             mSync.notifyAll();
             try {
@@ -159,7 +172,9 @@ public final class RenderThread implements Runnable {
 
     @Override
     public final void run() {
-        if (DEBUG) Log.i(TAG, "RenderThread thread started:");
+        if (DEBUG) {
+            Log.i(TAG, "RenderThread thread started:");
+        }
         synchronized (mSync) {
             mRequestSetEglContext = mRequestRelease = false;
             mRequestDraw = 0;
@@ -168,7 +183,9 @@ public final class RenderThread implements Runnable {
         boolean localRequestDraw;
         for (; ; ) {
             synchronized (mSync) {
-                if (mRequestRelease) break;
+                if (mRequestRelease) {
+                    break;
+                }
                 if (mRequestSetEglContext) {
                     mRequestSetEglContext = false;
                     internalPrepare();
@@ -204,11 +221,15 @@ public final class RenderThread implements Runnable {
             internalRelease();
             mSync.notifyAll();
         }
-        if (DEBUG) Log.i(TAG, "RenderThread thread finished:");
+        if (DEBUG) {
+            Log.i(TAG, "RenderThread thread finished:");
+        }
     }
 
     private final void internalPrepare() {
-        if (DEBUG) Log.i(TAG, "internalPrepare:");
+        if (DEBUG) {
+            Log.i(TAG, "internalPrepare:");
+        }
         internalRelease();
         mEgl = new EGLBase(mShard_context, false, mIsRecordable);
 
@@ -221,7 +242,9 @@ public final class RenderThread implements Runnable {
     }
 
     private final void internalRelease() {
-        if (DEBUG) Log.i(TAG, "internalRelease:");
+        if (DEBUG) {
+            Log.i(TAG, "internalRelease:");
+        }
         if (mInputSurface != null) {
             mInputSurface.release();
             mInputSurface = null;
